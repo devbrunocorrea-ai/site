@@ -3,74 +3,414 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meu App</title>
+    <meta name="description" content="App moderno para facilitar a rotina com produtividade e organização.">
+    <title>Meu App | Organização e produtividade</title>
     <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --bg: #f4f7fb;
+            --card: #ffffff;
+            --text: #1f2937;
+            --muted: #6b7280;
+            --border: #dbe3f0;
+            --success: #10b981;
+            --shadow: 0 18px 40px rgba(37, 99, 235, 0.12);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: Arial, sans-serif;
-            background: #f5f7fa;
             margin: 0;
-            padding: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(180deg, #eef4ff 0%, var(--bg) 100%);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
         }
 
         header {
-            background: #2563eb;
+            background: linear-gradient(135deg, var(--primary) 0%, #1e40af 100%);
             color: white;
-            padding: 20px;
-            text-align: center;
+            padding: 24px 20px;
+            box-shadow: 0 10px 30px rgba(30, 64, 175, 0.2);
         }
 
-        main {
-            max-width: 800px;
-            margin: 50px auto;
-            text-align: center;
-            padding: 20px;
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .brand {
+            font-size: 1.4rem;
+            font-weight: 700;
+            letter-spacing: 0.02em;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 600;
+        }
+
+        .hero {
+            padding: 80px 20px 40px;
+        }
+
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .eyebrow {
+            display: inline-block;
+            padding: 8px 14px;
+            background: rgba(37, 99, 235, 0.12);
+            color: var(--primary-dark);
+            border-radius: 999px;
+            font-weight: 700;
+            font-size: 0.8rem;
+            margin-bottom: 18px;
+        }
+
+        h1 {
+            font-size: clamp(2.5rem, 4vw, 4rem);
+            margin: 0 0 18px;
+            line-height: 1.1;
+        }
+
+        .lead {
+            margin: 0 0 28px;
+            color: var(--muted);
+            font-size: 1.1rem;
+            max-width: 560px;
+        }
+
+        .cta-group {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
         }
 
         .btn {
             display: inline-block;
-            margin: 10px;
-            padding: 12px 24px;
-            color: white;
-            background: #2563eb;
-            text-decoration: none;
-            border-radius: 8px;
-            transition: 0.3s;
+            padding: 14px 24px;
+            border-radius: 12px;
+            font-weight: 700;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
 
-        .btn:hover {
-            background: #1d4ed8;
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            box-shadow: 0 12px 20px rgba(37, 99, 235, 0.22);
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: var(--text);
+            border: 1px solid var(--border);
+        }
+
+        .hero-visual {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 24px;
+            box-shadow: var(--shadow);
+        }
+
+        .mini-app {
+            background: linear-gradient(180deg, #f8fbff 0%, #eef4ff 100%);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 18px;
+        }
+
+        .mini-app-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 18px;
+            font-weight: 700;
+        }
+
+        .status {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(16, 185, 129, 0.12);
+            color: #047857;
+            padding: 6px 10px;
+            border-radius: 999px;
+            font-size: 0.8rem;
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--success);
+        }
+
+        .metrics {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(110px, 1fr));
+            gap: 12px;
+        }
+
+        .metric {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 16px;
+        }
+
+        .metric strong {
+            display: block;
+            font-size: 1.6rem;
+            margin-bottom: 4px;
+        }
+
+        .features {
+            padding: 40px 20px 80px;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .section-title h2 {
+            margin: 0 0 12px;
+            font-size: clamp(2rem, 3vw, 2.7rem);
+        }
+
+        .section-title p {
+            margin: 0;
+            color: var(--muted);
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(220px, 1fr));
+            gap: 24px;
+        }
+
+        .card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            padding: 28px 22px;
+            box-shadow: 0 12px 30px rgba(15, 23, 42, 0.04);
+        }
+
+        .icon {
+            width: 52px;
+            height: 52px;
+            border-radius: 14px;
+            background: rgba(37, 99, 235, 0.1);
+            color: var(--primary);
+            display: grid;
+            place-items: center;
+            font-size: 1.5rem;
+            margin-bottom: 16px;
+            font-weight: 700;
+        }
+
+        .card h3 {
+            margin: 0 0 10px;
+            font-size: 1.3rem;
+        }
+
+        .card p {
+            margin: 0;
+            color: var(--muted);
+        }
+
+        .cta-banner {
+            margin: 0 20px 60px;
+            background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%);
+            color: white;
+            border-radius: 24px;
+            padding: 32px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            box-shadow: var(--shadow);
+        }
+
+        .cta-banner h3 {
+            margin: 0 0 8px;
+            font-size: clamp(1.5rem, 2vw, 2rem);
+        }
+
+        .cta-banner p {
+            margin: 0;
+            color: rgba(255,255,255,0.8);
         }
 
         footer {
-            margin-top: 50px;
+            background: #0f172a;
+            color: rgba(255, 255, 255, 0.8);
+            padding: 32px 20px;
             text-align: center;
-            padding: 20px;
-            background: #e5e7eb;
         }
 
         footer a {
+            color: #bfdbfe;
             margin: 0 10px;
-            color: #2563eb;
-            text-decoration: none;
+        }
+
+        @media (max-width: 760px) {
+            .hero-content,
+            .card-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero {
+                padding-top: 50px;
+            }
+
+            .nav {
+                justify-content: center;
+                text-align: center;
+            }
+
+            .cta-banner {
+                text-align: center;
+                justify-content: center;
+            }
         }
     </style>
 </head>
 <body>
     <header>
-        <h1>Bem-vindo ao Meu App</h1>
+        <div class="container nav">
+            <div class="brand">Meu App</div>
+            <nav class="nav-links" aria-label="Navegação principal">
+                <a href="#recursos">Recursos</a>
+                <a href="#beneficios">Benefícios</a>
+                <a href="#contato">Contato</a>
+            </nav>
+        </div>
     </header>
 
     <main>
-        <h2>Sua solução para facilitar o dia a dia</h2>
-        <p>Utilize nosso aplicativo para aproveitar todos os recursos disponíveis.</p>
+        <section class="hero">
+            <div class="container hero-content">
+                <div>
+                    <span class="eyebrow">Mais produtividade</span>
+                    <h1>Organize sua rotina com inteligência e praticidade.</h1>
+                    <p class="lead">Conecte tarefas, acompanhe resultados e transforme a sua rotina em um processo simples, rápido e eficiente.</p>
+                    <div class="cta-group">
+                        <a class="btn btn-primary" href="#começar">Começar</a>
+                        <a class="btn btn-secondary" href="#recursos">Ver recursos</a>
+                    </div>
+                </div>
 
-        #Começar</a>
+                <div class="hero-visual" id="começar" aria-label="Preview do aplicativo">
+                    <div class="mini-app">
+                        <div class="mini-app-header">
+                            <span>Dashboard</span>
+                            <span class="status"><span class="dot"></span> Online</span>
+                        </div>
+                        <div class="metrics">
+                            <div class="metric">
+                                <strong>84%</strong>
+                                <span>Produtividade</span>
+                            </div>
+                            <div class="metric">
+                                <strong>120+</strong>
+                                <span>Tarefas</span>
+                            </div>
+                            <div class="metric">
+                                <strong>24h</strong>
+                                <span>Monitoramento</span>
+                            </div>
+                            <div class="metric">
+                                <strong>9.8</strong>
+                                <span>Avaliação</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="features" id="recursos">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Por que escolher o Meu App?</h2>
+                    <p>Ferramentas pensadas para facilitar a sua rotina e aumentar a organização.</p>
+                </div>
+
+                <div class="card-grid" id="beneficios">
+                    <article class="card">
+                        <div class="icon">⚡</div>
+                        <h3>Agilidade</h3>
+                        <p>Gerencie tarefas de forma simples e reduza o tempo gasto em processos repetitivos.</p>
+                    </article>
+
+                    <article class="card">
+                        <div class="icon">📊</div>
+                        <h3>Visibilidade</h3>
+                        <p>Acompanhe métricas e resultados em tempo real para tomar decisões melhores.</p>
+                    </article>
+
+                    <article class="card">
+                        <div class="icon">🔒</div>
+                        <h3>Segurança</h3>
+                        <p>Protegemos seus dados com uma estrutura pensada para confiança e privacidade.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <div class="container">
+            <div class="cta-banner" id="contato">
+                <div>
+                    <h3>Pronto para começar?</h3>
+                    <p>Experimente uma solução que simplifica o seu dia a dia.</p>
+                </div>
+                <a class="btn btn-secondary" href="mailto:contato@meuapp.com">Fale conosco</a>
+            </div>
+        </div>
     </main>
 
     <footer>
-        politica-privacidade.htmlPolítica de Privacidade</a>
-        |
-        termos-servico.htmlTermos de Serviço</a>
+        <div class="container">
+            <a href="politica-privacidade/">Política de Privacidade</a>
+            |
+            <a href="termos-servico/">Termos de Serviço</a>
+        </div>
     </footer>
 </body>
 </html>
